@@ -1,34 +1,34 @@
 package com.example.aoopproject.classes
 
+
 import android.content.Context
-import android.util.Log
+
+import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.Response
+
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.coroutines.*
-import org.json.JSONObject
-import java.net.URL
-import java.util.*
 
-class APIHandler (code: String, context: Context, custom: (JSONObject) -> Unit){
-    var data : JSONObject? = null
+import org.json.JSONObject
+
+
+class APIHandler (code: String, context: Context){
+    var data : MutableLiveData<JSONObject> = MutableLiveData()
     private val url = "https://world.openfoodfacts.org/api/v0/product/${code}.json"
     private val con = context
     init {
-        Log.d("Thread about to start", "IM STARTING")
-        useResult(custom)
+        useResult()
     }
-    private fun useResult(useResult: (JSONObject) -> Unit){
+    private fun useResult(){
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
             { response ->
-                Log.d("YO work please", "Value assigned")
-                data = response
-                Log.d("I HAVE VALUE", data.toString())
+                if(response.has("code")) {
+                    data.postValue(response)
+                }
             },
             { error ->
+                println("Error requesting product: $error")
             }
         )
         var queue = Volley.newRequestQueue(con)

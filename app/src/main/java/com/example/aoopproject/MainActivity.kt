@@ -22,35 +22,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         camera = findViewById<Button>(R.id.camerabutton)
-        textView = findViewById<TextView>(R.id.textview)
 
         camera.setOnClickListener {
-//            val options = ScanOptions();
-//            options.setDesiredBarcodeFormats(ScanOptions.ONE_D_CODE_TYPES);
-//            options.setPrompt("Scan a barcode")
-//            options.setCameraId(0)
-//            options.setBeepEnabled(false)
-//            options.setBarcodeImageEnabled(true)
-//            options.setOrientationLocked(false)
-            //barcodeLauncher.launch(options)
-
-            val productview =  Intent(this, ProductViewer::class.java)
-            productview.putExtra("code", "5410013184706")
-            startActivity(productview)
+            val options = ScanOptions();
+            options.setDesiredBarcodeFormats(ScanOptions.ONE_D_CODE_TYPES);
+            options.setPrompt("Scan a barcode")
+            options.setCameraId(0)
+            options.setBeepEnabled(false)
+            options.setBarcodeImageEnabled(true)
+            options.setOrientationLocked(false)
+            barcodeLauncher.launch(options)
 
 
         }
     }
 
-//    private val barcodeLauncher = registerForActivityResult(
-//        ScanContract()
-//    ) { result: ScanIntentResult ->
-//        if (result.contents == null) {
-//            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
-//        } else {
-//            val productview =  Intent(this, ProductViewer::class.java)
-//            productview.putExtra("code", result.contents)
-//            startActivity(productview)
-//        }
-//    }
+    private val barcodeLauncher = registerForActivityResult(
+        ScanContract()
+    ) { result: ScanIntentResult ->
+        if (result.contents == null) {
+            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+        } else {
+            val productview =  Intent(this, ProductViewer::class.java)
+            productview.putExtra("code", result.contents)
+            startActivity(productview)
+        }
+    }
 }
