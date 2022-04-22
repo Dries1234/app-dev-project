@@ -18,8 +18,8 @@ class ImageProvider {
             "d" -> img = R.drawable.ic_nutriscore_d
             "c" -> img = R.drawable.ic_nutriscore_c
             "e" -> img = R.drawable.ic_nutriscore_e
+            "unknown" -> img = R.drawable.ic_nutriscore_unknown
         }
-        println(img.toString())
         return img
     }
 

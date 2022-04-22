@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">AoopProject</string>
     <string name="nova_score">Nova Score: %s</string>
-    <string name="product_name">%s %s</string>
+    <string name="product_name">%s: %s</string>
+    <string name="nutriments">Nutrients for: %s</string>
+    <string name="concat">%s%s</string>
+    <string name="grams">%s g %s</string>
 </resources>
