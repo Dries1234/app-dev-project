@@ -5,4 +5,8 @@
     <string name="nutriments">Nutrients for: %s</string>
     <string name="concat">%s%s</string>
     <string name="grams">%s g %s</string>
+    <string name="favoritesTitle">Favorites</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+    <string name="camera_button">Open camera</string>
 </resources>
