@@ -23,7 +23,7 @@ class ProductViewer : AppCompatActivity() {
         setContentView(R.layout.activity_product_viewer)
 
         val code = intent.getStringExtra("code") as String
-        val productJSON = APIHandler(code, this)
+        val productJSON = APIHandler(code)
         productJSON.data.observe(this, Observer {
             setContent(productJSON.data.value)
         })
