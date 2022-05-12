@@ -3,7 +3,7 @@ package com.example.aoopproject
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.widget.EditText
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +13,6 @@ import com.example.aoopproject.classes.APIHandler
 import com.example.aoopproject.classes.ImageProvider
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
-import org.w3c.dom.Text
 import java.lang.Exception
 
 
@@ -27,6 +26,11 @@ class ProductViewer : AppCompatActivity() {
         productJSON.data.observe(this, Observer {
             setContent(productJSON.data.value)
         })
+        val favouriteButton = findViewById<Button>(R.id.favourite)
+
+        favouriteButton.setOnClickListener {
+            //do favourite code
+        }
     }
 
     private fun setContent(response : JSONObject?){
@@ -39,7 +43,10 @@ class ProductViewer : AppCompatActivity() {
         // product name
         val product = response?.getJSONObject("product")
         productName.text = getString(R.string.product_name,
-            product?.getJSONArray("brands_tags")?.get(0), product?.getString("product_name"))
+            product?.getJSONArray("brands_tags")?.get(0),
+            if (product?.getString("product_name_en") != "")
+                product?.getString("product_name_en")
+            else product.getString("product_name"))
 
         // nova score
         val novascore: String? = try {
@@ -64,11 +71,14 @@ class ProductViewer : AppCompatActivity() {
         //nutriments
         val nutriments = findViewById<TextView>(R.id.nutriments)
         val nutriTitle = findViewById<TextView>(R.id.nutrimentsTitle)
+        val ingredients = findViewById<TextView>(R.id.ingredients)
         nutriTitle.text = getString(R.string.nutriments, product?.getString("nutrition_data_per"))
         nutriTitle.setTypeface(null, Typeface.BOLD)
         val nutrimentsData = product?.getJSONObject("nutriments")
         try {
             nutriments.text = getString(R.string.concat, nutriments.text , getString(R.string.grams,nutrimentsData?.getString("fat_100g"), "Fat\n"))
+
+
 
         }catch (e:Exception){
             //dont add to string
@@ -89,7 +99,8 @@ class ProductViewer : AppCompatActivity() {
             //dont add to string
         }
 
-
-
+        ingredients.text = if (product?.getString("ingredients_text_en") != "")
+            product?.getString("ingredients_text_en")
+        else product.getString("ingredients_text")
     }
 }

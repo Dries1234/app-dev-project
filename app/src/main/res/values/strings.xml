@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AoopProject</string>
+    <string name="app_name">FoodChecker</string>
     <string name="nova_score">Nova Score: %s</string>
     <string name="product_name">%s: %s</string>
     <string name="nutriments">Nutrients for: %s</string>
@@ -9,4 +9,6 @@
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
     <string name="camera_button">Open camera</string>
+    <string name="favourite">Favourite</string>
+    <string name="settings">Settings</string>
 </resources>
