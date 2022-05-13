@@ -3,20 +3,23 @@ package com.example.aoopproject
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
 
-class SettingsActivity : AppCompatActivity(),
-    SharedPreferences.OnSharedPreferenceChangeListener {
-
+class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
+
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.settings, SettingsFragment())
                 .commit()
         }
+
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -26,21 +29,5 @@ class SettingsActivity : AppCompatActivity(),
 
         }
 
-    }
-
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
-        when(key) {
-            "playback" -> {
-                val rate = sharedPreferences.getString(key, "1")
-                when(rate?.toFloat()) {
-                    0.25F -> {
-
-                    }
-                }
-            }
-            "twitch" -> {
-
-            }
-        }
     }
 }

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.aoopproject.classes.APIHandler
+import com.example.aoopproject.classes.DbHelper
 import com.example.aoopproject.classes.ImageProvider
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
@@ -23,14 +24,29 @@ class ProductViewer : AppCompatActivity() {
 
         val code = intent.getStringExtra("code") as String
         val productJSON = APIHandler(code)
-        productJSON.data.observe(this, Observer {
-            setContent(productJSON.data.value)
-        })
         val favouriteButton = findViewById<Button>(R.id.favourite)
 
-        favouriteButton.setOnClickListener {
-            //do favourite code
-        }
+        productJSON.data.observe(this, Observer {
+            favouriteButton.setOnClickListener {
+                println("yo")
+                val db = DbHelper(this,null)
+                val cursor = db.getFavourite(code)
+                try {
+                    cursor.moveToFirst()
+                    val bcode = cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.COL_BARCODE))
+                    println(bcode)
+                    db.deleteFavourite(bcode);
+                }
+                catch (e: Exception){
+                    println(e)
+                    db.addFavourite(code, productJSON.data.value?.getJSONObject("product")!!.getString("product_name"))
+                }
+
+            }
+            setContent(productJSON.data.value)
+        })
+
+
     }
 
     private fun setContent(response : JSONObject?){
