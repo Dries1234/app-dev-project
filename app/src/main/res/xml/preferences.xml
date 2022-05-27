@@ -4,15 +4,25 @@
     >
     <PreferenceCategory android:title="General">
 
+        <ListPreference
+            android:title="@string/theme"
+            android:dialogTitle="@string/theme"
+            android:entries="@array/theme_pref"
+            android:entryValues="@array/theme_values"
+            app:useSimpleSummaryProvider="true"
+            android:key="@string/theme_pref"
+            android:defaultValue="0"
+            />
 
         <ListPreference
             android:summary="%s"
             app:defaultValue="@string/defaultLang"
             android:entries="@array/languageEntries"
             android:entryValues="@array/languageValues"
-            android:key="languagePreference"
+            android:key="@string/lang_pref"
             android:title="Language"
             app:useSimpleSummaryProvider="true"
             />
+
     </PreferenceCategory>
 </PreferenceScreen>

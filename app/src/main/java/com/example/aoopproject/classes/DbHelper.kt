@@ -52,4 +52,8 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLit
         val db = this.readableDatabase
         return db.rawQuery("SELECT * FROM $TABLE_NAME WHERE $COL_BARCODE = '$barcode'", null)
     }
+    fun getFavourites(): Cursor{
+        val db = this.readableDatabase
+        return db.rawQuery("SELECT * FROM $TABLE_NAME", null);
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.aoopproject
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,13 +11,15 @@ import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import com.example.aoopproject.classes.Util
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
+import java.util.*
 
 
 const val DEBUG: Boolean = true
-const val CODE: String = "3161711001971"
+const val CODE: String = "3268840001008"
 
 class MainActivity : AppCompatActivity() {
     lateinit var camera: Button;
@@ -28,6 +31,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val sf = PreferenceManager.getDefaultSharedPreferences(this)
+        Util.applyPreferencedTheme(sf, this)
+
+        val lang = sf.getString(this.getString(R.string.lang_pref), "en")
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        this.createConfigurationContext(config)
 
         setSupportActionBar(findViewById(R.id.toolbar))
 

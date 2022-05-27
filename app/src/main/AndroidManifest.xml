@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,10 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AoopProject">
         <activity
-            android:name=".SettingsActivity"
+            android:name=".FavouritesActivity"
             android:exported="false" />
         <activity
-            android:name=".FavouritesActivity"
+            android:name=".SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".Favourites"

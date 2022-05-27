@@ -11,5 +11,18 @@
     <string name="camera_button">Open camera</string>
     <string name="favourite">Favourite</string>
     <string name="settings">Settings</string>
-    <string name="defaultLang">english</string>
+    <string name="productImage">Product</string>
+
+    <string name="theme">Theme</string>
+    <string name="theme_pref" translatable="false">theme_pref</string>
+
+    <string name="auto_theme">System default theme</string>
+    <string name="dark_theme">Dark theme</string>
+    <string name="light_theme">Light theme</string>
+    <string name="auto_theme_pref" translatable="false">auto_theme_pref</string>
+    <string name="dark_theme_pref" translatable="false">dark_theme_pref</string>
+    <string name="light_theme_pref" translatable="false">light_theme_pref</string>
+
+    <string name="lang_pref" translatable="false">language_pref</string>
+    <string name="defaultLang" translatable="false">english</string>
 </resources>

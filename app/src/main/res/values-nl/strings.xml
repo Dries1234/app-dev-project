@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VoedselChecker</string>
+    <string name="nova_score">Nova Score: %s</string>
+    <string name="product_name">%s: %s</string>
+    <string name="nutriments">Nutriënten voor: %s</string>
+    <string name="concat">%s%s</string>
+    <string name="grams">%s g %s</string>
+    <string name="favoritesTitle">Favorieten</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Sluit</string>
+    <string name="camera_button">Open camera</string>
+    <string name="favourite">Zet als favoriet</string>
+    <string name="settings">Instellingen</string>
+    <string name="productImage">Product</string>
+    <string name="theme">Thema</string>
+
+    <string name="auto_theme">Systeem standaard thema</string>
+    <string name="dark_theme">Donker thema</string>
+    <string name="light_theme">Licht thema</string>
+</resources>
