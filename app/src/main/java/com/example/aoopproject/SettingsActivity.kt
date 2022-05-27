@@ -46,9 +46,7 @@ class SettingsActivity : AppCompatActivity(),
                 Util.applyPreferencedTheme(sharedPreferences, this)
             }
             getString(R.string.lang_pref) -> {
-                println(key)
                 val lang = sharedPreferences.getString(this.getString(R.string.lang_pref), "en")
-                println(lang)
                 val locale = Locale(lang)
                 Locale.setDefault(locale)
                 val conf = this.resources.configuration

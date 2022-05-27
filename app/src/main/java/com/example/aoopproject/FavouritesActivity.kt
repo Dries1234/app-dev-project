@@ -16,12 +16,23 @@ import java.util.concurrent.TimeUnit
 class FavouritesActivity : AppCompatActivity(){
     lateinit var recyclerAdapter : RecyclerAdapter
     lateinit var recyclerView: RecyclerView
+    var shouldExecute: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favourites)
         recyclerView = findViewById(R.id.recycler_view)
         getFavourites()
 
+    }
+
+    override fun onResume() {
+        if(shouldExecute){
+            recyclerAdapter.update()
+        }
+        else{
+            shouldExecute = true
+        }
+        super.onResume()
     }
 
 
@@ -38,7 +49,6 @@ class FavouritesActivity : AppCompatActivity(){
 
                 val json = it.getJSONObject("product");
                 dataSet.add(json)
-                println("Data: " + dataSet)
                 lock.postValue(true)
             }
 
@@ -51,7 +61,6 @@ class FavouritesActivity : AppCompatActivity(){
     }
 
     private fun config(array:ArrayList<JSONObject>){
-        println(array)
         recyclerAdapter = RecyclerAdapter(array, this)
         recyclerView.adapter = recyclerAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)

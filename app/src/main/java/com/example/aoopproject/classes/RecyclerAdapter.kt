@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aoopproject.ProductViewer
 import com.example.aoopproject.R
@@ -18,7 +19,7 @@ import org.json.JSONObject
 
 class RecyclerAdapter (private var dataSet: ArrayList<JSONObject>, private val context: Context) :
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(), LifecycleOwner {
-
+    private val lifecycleRegistry: LifecycleRegistry = LifecycleRegistry(this)
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView
@@ -76,7 +77,7 @@ class RecyclerAdapter (private var dataSet: ArrayList<JSONObject>, private val c
     }
 
     override fun getLifecycle(): Lifecycle {
-        TODO("Not yet implemented")
+        return lifecycleRegistry
     }
 
 

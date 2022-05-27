@@ -17,9 +17,9 @@ import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
 import java.util.*
 
-
-const val DEBUG: Boolean = true
-const val CODE: String = "3268840001008"
+//set to true for debug mode
+const val DEBUG: Boolean = false
+const val CODE: String = "5410013800002"
 
 class MainActivity : AppCompatActivity() {
     lateinit var camera: Button;
@@ -92,12 +92,10 @@ class MainActivity : AppCompatActivity() {
         when(item.itemId) {
             R.id.settings -> {
                 val intent = Intent(this, SettingsActivity::class.java)
-                println("Settings")
                 startActivity(intent)
             }
             R.id.favourites -> {
                 val intent = Intent(this, FavouritesActivity::class.java)
-                println("favourites")
                 startActivity(intent)
             }
         }

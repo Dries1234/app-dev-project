@@ -1,6 +1,7 @@
 package com.example.aoopproject
 
 
+import RecyclerAdapter
 import android.graphics.Typeface
 import android.os.Bundle
 import android.widget.Button
@@ -28,19 +29,17 @@ class ProductViewer : AppCompatActivity() {
 
         productJSON.data.observe(this, Observer {
             favouriteButton.setOnClickListener {
-                println("yo")
                 val db = DbHelper(this,null)
                 val cursor = db.getFavourite(code)
                 try {
                     cursor.moveToFirst()
                     val bcode = cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.COL_BARCODE))
-                    println(bcode)
                     db.deleteFavourite(bcode);
                 }
                 catch (e: Exception){
-                    println(e)
                     db.addFavourite(code, productJSON.data.value?.getJSONObject("product")!!.getString("product_name"))
                 }
+
 
             }
             setContent(productJSON.data.value)
@@ -58,11 +57,25 @@ class ProductViewer : AppCompatActivity() {
 
         // product name
         val product = response?.getJSONObject("product")
-        productName.text = getString(R.string.product_name,
-            product?.getJSONArray("brands_tags")?.get(0),
+        val brand: String? = try {
+            product?.getJSONArray("brands_tags")?.get(0) as String
+        }catch (e: Exception){
+            "No brands found"
+        }
+        val name: String? = try {
+
             if (product?.getString("product_name_en") != "")
                 product?.getString("product_name_en")
-            else product.getString("product_name"))
+            else product.getString("product_name")
+        } catch (e: Exception){
+            try {
+                product?.getString("product_name")
+            }catch(e: Exception){
+                "No product name found"
+            }
+        }
+        productName.text = getString(R.string.product_name, brand ,name)
+
 
         // nova score
         val novascore: String? = try {
@@ -114,9 +127,18 @@ class ProductViewer : AppCompatActivity() {
         }catch(e:Exception){
             //dont add to string
         }
+        val ingredientsText: String? = try {
 
-        ingredients.text = if (product?.getString("ingredients_text_en") != "")
-            product?.getString("ingredients_text_en")
-        else product.getString("ingredients_text")
+            if (product?.getString("ingredients_text_en") != "")
+                product?.getString("ingredients_text_en")
+            else product.getString("ingredients_text")
+        } catch (e: Exception){
+            try {
+                product?.getString("ingredients_text")
+            }catch(e: Exception){
+                "No ingredients found"
+            }
+        }
+        ingredients.text = ingredientsText
     }
 }

@@ -13,11 +13,9 @@ class Util {
             when(sf.getString(context.getString(R.string.theme_pref),
                 context.getString(R.string.auto_theme_pref))) {
                 context.getString(R.string.dark_theme_pref) -> {
-                    Log.d("TAG", "Dark mode")
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }
                 context.getString(R.string.light_theme_pref) -> {
-                    Log.d("TAG", "Light mode")
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 }
                 else -> {
