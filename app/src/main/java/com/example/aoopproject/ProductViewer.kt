@@ -2,8 +2,12 @@ package com.example.aoopproject
 
 
 import RecyclerAdapter
+import android.content.ContentValues
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
+import android.os.Debug
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.aoopproject.classes.APIHandler
+import com.example.aoopproject.classes.Contract
 import com.example.aoopproject.classes.DbHelper
 import com.example.aoopproject.classes.ImageProvider
 import com.squareup.picasso.Picasso
@@ -29,19 +34,23 @@ class ProductViewer : AppCompatActivity() {
 
         productJSON.data.observe(this, Observer {
             favouriteButton.setOnClickListener {
-                val db = DbHelper(this,null)
-                val cursor = db.getFavourite(code)
+                val cursor = contentResolver.query(Uri.withAppendedPath(Contract.BASE_CONTENT_URI, "favourite/$code"), null,code,null,null)
                 try {
-                    cursor.moveToFirst()
-                    val bcode = cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.COL_BARCODE))
-                    db.deleteFavourite(bcode);
+                    cursor?.moveToFirst()
+                    val bcode = cursor?.getString(cursor?.getColumnIndexOrThrow(DbHelper.COL_BARCODE))
+                    contentResolver.delete(Uri.withAppendedPath(Contract.BASE_CONTENT_URI, "favourite/$bcode"),null,null)
                 }
                 catch (e: Exception){
-                    db.addFavourite(code, productJSON.data.value?.getJSONObject("product")!!.getString("product_name"))
+                    val values = ContentValues()
+                    values.put(DbHelper.COL_BARCODE , code)
+                    values.put(DbHelper.COL_NAME,productJSON.data.value?.getJSONObject("product")!!.getString("product_name") )
+                    contentResolver.insert(Uri.withAppendedPath(Contract.BASE_CONTENT_URI, "favourite"), values)
                 }
+                cursor?.close()
 
 
             }
+
             setContent(productJSON.data.value)
         })
 

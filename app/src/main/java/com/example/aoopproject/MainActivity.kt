@@ -18,7 +18,7 @@ import com.journeyapps.barcodescanner.ScanOptions
 import java.util.*
 
 //set to true for debug mode
-const val DEBUG: Boolean = false
+const val DEBUG: Boolean = true
 const val CODE: String = "5410013800002"
 
 class MainActivity : AppCompatActivity() {

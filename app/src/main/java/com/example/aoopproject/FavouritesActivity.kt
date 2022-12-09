@@ -1,6 +1,7 @@
 package com.example.aoopproject
 
 import RecyclerAdapter
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -8,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aoopproject.classes.APIHandler
+import com.example.aoopproject.classes.Contract
 import com.example.aoopproject.classes.DbHelper
 import com.google.android.material.navigation.NavigationView
 import org.json.JSONObject
@@ -37,8 +39,8 @@ class FavouritesActivity : AppCompatActivity(){
 
 
     private fun getFavourites() {
-        val db = DbHelper(this, null)
-        val cursor = db.getFavourites();
+        val cursor = contentResolver.query(Uri.withAppendedPath(Contract.BASE_CONTENT_URI, "favourite"), null,null,null,null)
+            ?: return
         val dataSet = arrayListOf<JSONObject>()
         val lock = MutableLiveData<Boolean>()
         while (cursor.moveToNext()) {
@@ -46,13 +48,13 @@ class FavouritesActivity : AppCompatActivity(){
             val api =
                 APIHandler(cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.COL_BARCODE)));
             api.data.observe(this) {
-
                 val json = it.getJSONObject("product");
                 dataSet.add(json)
                 lock.postValue(true)
             }
 
         }
+        cursor.close()
         lock.observe(this) {
             if(it) {
                 config(dataSet)

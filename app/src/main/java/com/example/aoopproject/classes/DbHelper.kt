@@ -11,6 +11,8 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLit
         private const val DB_NAME = "favourites.db"
         private const val DB_VERSION = 1
 
+        val CONTENT_URI = Contract.BASE_CONTENT_URI.buildUpon().appendPath("favourite").build()
+
         const val TABLE_NAME = "favourites"
 
         const val COL_ID = "id"
@@ -48,7 +50,7 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) : SQLit
         db.delete(TABLE_NAME, "$COL_BARCODE IS ?", arrayOf(barcode))
     }
 
-    fun getFavourite(barcode : String): Cursor {
+    fun getFavourite(barcode : String?): Cursor {
         val db = this.readableDatabase
         return db.rawQuery("SELECT * FROM $TABLE_NAME WHERE $COL_BARCODE = '$barcode'", null)
     }
