@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.example.aoopproject.classes.APIHandler
 import com.example.aoopproject.classes.Contract
 import com.example.aoopproject.classes.DbHelper
@@ -24,9 +25,12 @@ import java.lang.Exception
 
 
 class ProductViewer : AppCompatActivity() {
+    private lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_viewer)
+
 
         val code = intent.getStringExtra("code") as String
         val productJSON = APIHandler(code)
@@ -47,8 +51,6 @@ class ProductViewer : AppCompatActivity() {
                     contentResolver.insert(Uri.withAppendedPath(Contract.BASE_CONTENT_URI, "favourite"), values)
                 }
                 cursor?.close()
-
-
             }
 
             setContent(productJSON.data.value)
@@ -103,7 +105,7 @@ class ProductViewer : AppCompatActivity() {
         }catch (e: Exception) {
             "unknown"
         }
-        val nutriImage = imgprovider.getNutriScore(nutriscore);
+        val nutriImage = imgprovider.getNutriScore(nutriscore)
         nutriImageView.setImageDrawable(ContextCompat.getDrawable(this, nutriImage))
 
         //nutriments

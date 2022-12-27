@@ -1,7 +1,7 @@
 package com.example.aoopproject
 
+
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,7 +10,11 @@ import android.widget.TextView
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
+
 import androidx.preference.PreferenceManager
+import com.example.aoopproject.classes.ProductFragment
 import com.example.aoopproject.classes.Util
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
@@ -19,7 +23,7 @@ import java.util.*
 
 //set to true for debug mode
 const val DEBUG: Boolean = true
-const val CODE: String = "5410013800002"
+const val CODE: String = "7622210449283"
 
 class MainActivity : AppCompatActivity() {
     lateinit var camera: Button;
@@ -79,6 +83,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun debugProduct(){
+//        val fragmentManager = supportFragmentManager
+//        val productfragment = ProductFragment()
+//        fragmentManager.commit {
+//            replace<ProductFragment>(R.id.fr_product)
+//            setReorderingAllowed(true)
+//            addToBackStack("name")
+//        }
         val productView = Intent(this, ProductViewer::class.java)
         productView.putExtra("code", CODE)
         startActivity(productView)

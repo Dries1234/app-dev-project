@@ -45,11 +45,11 @@ class RecyclerAdapter (private var dataSet: ArrayList<JSONObject>, private val c
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.setOnClickListener {
-            val productView = Intent(context, ProductViewer::class.java)
-            productView.putExtra("code", dataSet[position].getString("_id"))
-            context.startActivity(productView)
-        }
+//        viewHolder.itemView.setOnClickListener {
+//            val productView = Intent(context, ProductViewer::class.java)
+//            productView.putExtra("code", dataSet[position].getString("_id"))
+//            context.startActivity(productView)
+//        }
         viewHolder.textView.text = dataSet[position].getString("product_name")
         Picasso.get().load(dataSet[position].getString("image_url")).into(viewHolder.imageView)
 

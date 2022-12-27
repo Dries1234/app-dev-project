@@ -2,6 +2,7 @@ package com.example.aoopproject.classes
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.BuildCompat
@@ -26,6 +27,9 @@ class Util {
                     }
                 }
             }
+        }
+        fun isTablet(context: Context): Boolean {
+            return context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK >= Configuration.SCREENLAYOUT_SIZE_LARGE
         }
     }
 }
