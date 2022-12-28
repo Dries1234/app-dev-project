@@ -13,4 +13,23 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="GruvboxTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Gruvbox color scheme -->
+        <item name="colorPrimary">@color/gruv_secondary</item>
+        <item name="colorOnPrimary">@color/gruv_fg</item>
+        <item name="colorPrimaryDark">@color/gruv_secondary_dark</item>
+        <item name="colorAccent">@color/gruv_secondary</item>
+        <item name="colorControlNormal">@color/gruv_secondary</item>
+        <item name="colorControlActivated">@color/gruv_secondary_dark</item>
+        <item name="colorControlHighlight">@color/gruv_secondary_dark</item>
+        <item name="android:textColor">@color/gruv_fg</item>
+        <item name="android:textColorPrimary">@color/gruv_fg</item>
+        <item name="android:textColorSecondary">@color/gruv_fg0</item>
+        <item name="android:windowBackground">@color/gruv_primary</item>
+        <item name="colorOnBackground">@color/gruv_fg</item>
+        <item name="android:navigationBarColor">@color/gruv_secondary</item>
+        <item name="android:colorButtonNormal">@color/gruv_secondary</item>
+        <item name="android:popupBackground">@color/gruv_primary</item>
+    </style>
+
 </resources>

@@ -1,21 +1,23 @@
 package com.example.aoopproject
 
 
+import InfinitePagerAdapter
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
+
 
 import androidx.preference.PreferenceManager
-import com.example.aoopproject.classes.ProductFragment
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.aoopproject.classes.Util
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
@@ -26,7 +28,7 @@ const val DEBUG: Boolean = true
 const val CODE: String = "7622210449283"
 
 class MainActivity : AppCompatActivity() {
-    lateinit var camera: Button;
+    lateinit var camera: FloatingActionButton;
     lateinit var textView: TextView;
 
 
@@ -47,7 +49,22 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        camera = findViewById<Button>(R.id.camerabutton)
+        val images = listOf(R.drawable.food)
+        val viewPager2 = findViewById<ViewPager2>(R.id.view_pager)
+        viewPager2.adapter = InfinitePagerAdapter(images)
+        viewPager2.currentItem = images.size / 2
+
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                if (position == 0) {
+                    viewPager2.currentItem = images.size / 2
+                } else if (position == images.size - 1) {
+                    viewPager2.currentItem = images.size / 2 + 1
+                }
+            }
+        })
+
+        camera = findViewById(R.id.camerabutton)
 
         if (!DEBUG) {
 
