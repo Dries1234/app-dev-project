@@ -24,7 +24,7 @@ import com.journeyapps.barcodescanner.ScanOptions
 import java.util.*
 
 //set to true for debug mode
-const val DEBUG: Boolean = true
+const val DEBUG: Boolean = false
 const val CODE: String = "7622210449283"
 
 class MainActivity : AppCompatActivity() {
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private val barcodeLauncher = registerForActivityResult(
+    val barcodeLauncher = registerForActivityResult(
         ScanContract()
     ) { result: ScanIntentResult ->
         if (result.contents == null) {
