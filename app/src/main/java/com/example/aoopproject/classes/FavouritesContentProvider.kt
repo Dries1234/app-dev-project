@@ -15,8 +15,8 @@ import java.util.logging.Logger
 class FavouritesContentProvider : ContentProvider() {
 
     companion object {
-        val ALL_FAVOURITES = 100;
-        val FAVOURITE_ID = 101;
+        val ALL_FAVOURITES = 100
+        val FAVOURITE_ID = 101
         fun buildUriMatcher(): UriMatcher {
             val uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
             uriMatcher.addURI(Contract.AUTHORITY, "favourite", ALL_FAVOURITES)
@@ -30,7 +30,7 @@ class FavouritesContentProvider : ContentProvider() {
         }
     }
 
-    lateinit var mDbHelper: DbHelper;
+    lateinit var mDbHelper: DbHelper
     override fun onCreate(): Boolean {
         mDbHelper = DbHelper(context!!, null)
         return true
@@ -49,7 +49,7 @@ class FavouritesContentProvider : ContentProvider() {
         val db = mDbHelper.writableDatabase
         when(match){
             ALL_FAVOURITES -> {
-               result = db.rawQuery("SELECT * FROM ${DbHelper.TABLE_NAME}", null);
+               result = db.rawQuery("SELECT * FROM ${DbHelper.TABLE_NAME}", null)
             }
             FAVOURITE_ID -> {
                 result =  db.rawQuery("SELECT * FROM ${DbHelper.TABLE_NAME} WHERE ${DbHelper.COL_BARCODE} = '$id'", null)
@@ -77,7 +77,7 @@ class FavouritesContentProvider : ContentProvider() {
     }
 
     override fun delete(uri: Uri, selection: String?, p2: Array<out String>?): Int {
-        var count = 0;
+        var count = 0
         val db = mDbHelper.writableDatabase
         val id = uri.pathSegments[1]
         count = db.delete(DbHelper.TABLE_NAME, "${DbHelper.COL_BARCODE} IS ?", arrayOf(id))

@@ -41,7 +41,7 @@ class ProductViewer : AppCompatActivity() {
                 val cursor = contentResolver.query(Uri.withAppendedPath(Contract.BASE_CONTENT_URI, "favourite/$code"), null,code,null,null)
                 try {
                     cursor?.moveToFirst()
-                    val bcode = cursor?.getString(cursor?.getColumnIndexOrThrow(DbHelper.COL_BARCODE))
+                    val bcode = cursor?.getString(cursor.getColumnIndexOrThrow(DbHelper.COL_BARCODE))
                     contentResolver.delete(Uri.withAppendedPath(Contract.BASE_CONTENT_URI, "favourite/$bcode"),null,null)
                 }
                 catch (e: Exception){
@@ -99,7 +99,7 @@ class ProductViewer : AppCompatActivity() {
         // product image
         Picasso.get().load(product?.getString("image_url")).into(productImage)
         // nutriscore image
-        val imgprovider = ImageProvider();
+        val imgprovider = ImageProvider()
         val nutriscore: String? = try {
             product?.getString("nutriscore_grade")
         }catch (e: Exception) {

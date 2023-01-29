@@ -11,7 +11,7 @@ class ImageProvider {
     * Returns the drawable for the provided nutriscore, or 0 if no nutri score was found
     * */
     fun getNutriScore(nutri: String?): Int{
-        var img : Int = 0;
+        var img : Int = 0
         when(nutri?.lowercase()){
             "a" -> img = R.drawable.ic_nutriscore_a
             "b" -> img = R.drawable.ic_nutriscore_b

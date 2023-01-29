@@ -129,9 +129,9 @@ class FavouritesActivity : AppCompatActivity(){
         while (cursor.moveToNext()) {
             lock.postValue(false)
             val api =
-                APIHandler(cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.COL_BARCODE)));
+                APIHandler(cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.COL_BARCODE)))
             api.data.observe(this) {
-                val json = it.getJSONObject("product");
+                val json = it.getJSONObject("product")
                 dataSet.add(json)
                 lock.postValue(true)
             }

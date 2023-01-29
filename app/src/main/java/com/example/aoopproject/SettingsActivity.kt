@@ -51,7 +51,7 @@ class SettingsActivity : AppCompatActivity(),
                 Locale.setDefault(locale)
                 val conf = this.resources.configuration
 
-                conf.setLocale(locale);
+                conf.setLocale(locale)
 
                 val metrics = resources.displayMetrics
                 resources.updateConfiguration(conf, metrics)

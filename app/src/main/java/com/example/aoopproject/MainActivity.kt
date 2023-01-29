@@ -28,9 +28,8 @@ const val DEBUG: Boolean = false
 const val CODE: String = "7622210449283"
 
 class MainActivity : AppCompatActivity() {
-    lateinit var camera: FloatingActionButton;
-    lateinit var textView: TextView;
-
+    lateinit var camera: FloatingActionButton
+    lateinit var textView: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,8 +68,8 @@ class MainActivity : AppCompatActivity() {
         if (!DEBUG) {
 
             camera.setOnClickListener {
-                val options = ScanOptions();
-                options.setDesiredBarcodeFormats(ScanOptions.ONE_D_CODE_TYPES);
+                val options = ScanOptions()
+                options.setDesiredBarcodeFormats(ScanOptions.ONE_D_CODE_TYPES)
                 options.setPrompt("Scan a barcode")
                 options.setCameraId(0)
                 options.setBeepEnabled(false)

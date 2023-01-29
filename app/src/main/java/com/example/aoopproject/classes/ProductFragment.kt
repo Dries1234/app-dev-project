@@ -89,7 +89,7 @@ class ProductFragment : Fragment() {
         }catch (e: Exception) {
             "unknown"
         }
-        val nutriImage = imgprovider.getNutriScore(nutriscore);
+        val nutriImage = imgprovider.getNutriScore(nutriscore)
         nutriImageView.setImageDrawable(ContextCompat.getDrawable(requireContext(), nutriImage))
         val nutriments = view.findViewById<TextView>(R.id.nutriments)
         val nutriTitle = view.findViewById<TextView>(R.id.nutrimentsTitle)
@@ -149,7 +149,7 @@ class ProductFragment : Fragment() {
             val cursor = contentResolver.query(Uri.withAppendedPath(Contract.BASE_CONTENT_URI, "favourite/$code"), null,code,null,null)
             try {
                 cursor?.moveToFirst()
-                val bcode = cursor?.getString(cursor?.getColumnIndexOrThrow(DbHelper.COL_BARCODE))
+                val bcode = cursor?.getString(cursor.getColumnIndexOrThrow(DbHelper.COL_BARCODE))
                 contentResolver.delete(Uri.withAppendedPath(Contract.BASE_CONTENT_URI, "favourite/$bcode"),null,null)
             }
             catch (e: Exception){

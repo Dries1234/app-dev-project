@@ -60,13 +60,13 @@ class RecyclerAdapter (private var dataSet: ArrayList<JSONObject>, private val c
 
     fun update() {
         val db = DbHelper(this.context, null)
-        val cursor = db.getFavourites();
+        val cursor = db.getFavourites()
         this.dataSet = arrayListOf<JSONObject>()
         while (cursor.moveToNext()) {
             val api =
-                APIHandler(cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.COL_BARCODE)));
+                APIHandler(cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.COL_BARCODE)))
             api.data.observe(this) {
-                val json = api.data.value?.getJSONObject("product");
+                val json = api.data.value?.getJSONObject("product")
                 if (json != null) {
                     this.dataSet.add(json)
                 }
